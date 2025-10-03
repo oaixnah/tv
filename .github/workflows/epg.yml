@@ -1,0 +1,22 @@
+name: EPG Update
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+      - name: Update EPG Files
+        run: |
+          rm -f e.xml && wget https://epg.112114.xyz/pp.xml -O e.xml
+          git add e.xml
+          git commit -m "EPG Update."
+      - name: Push changes
+        run: git push origin main
