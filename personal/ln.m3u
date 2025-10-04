@@ -100,6 +100,8 @@ http://hwottcdn.ln.chinamobile.com/PLTV/11/224/3221226893/index.m3u8
 #EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://tv.oaix.tech/logo/兵团卫视.png" group-title="卫视频道",兵团卫视
 http://hwottcdn.ln.chinamobile.com/PLTV/11/224/3221226859/index.m3u8
 #EXTINF:-1 tvg-name="五星体育" tvg-logo="https://tv.oaix.tech/logo/五星体育.png" group-title="体育频道",五星体育
+http://[2409:8087:1e01:20::3]/PLTV/11/224/3221225732/1.m3u8
+#EXTINF:-1 tvg-name="五星体育" tvg-logo="https://tv.oaix.tech/logo/五星体育.png" group-title="体育频道",五星体育
 https://cdn3.163189.xyz/163189/wxty
 #EXTINF:-1 tvg-name="风云足球" tvg-logo="https://tv.oaix.tech/logo/风云足球.png" group-title="体育频道",风云足球
 http://hwottcdn.ln.chinamobile.com/PLTV/11/224/3221227377/index.m3u8
