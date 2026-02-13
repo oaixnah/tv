@@ -26,8 +26,7 @@ jobs:
 
       - name: Update EPG Files
         run: |
-          uv run epg/erw-api/main.py
-          mv epg/erw-api/e.xml .
+          uv run python -m epg.erw-api.main
           git add e.xml
           if ! git diff-index --quiet HEAD --; then
             git commit -m "EPG Update."
