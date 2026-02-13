@@ -10,6 +10,7 @@ def save_epg_file(epg_data: Data):
     # 添加 tv 元素的属性
     tv.set("info-name", epg_data.info_name)
     tv.set("info-url", epg_data.info_url)
+    tv.set('data-from', epg_data.data_from)
 
     # 添加频道
     for channel in epg_data.channels:
