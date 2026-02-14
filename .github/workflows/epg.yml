@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v6
 
@@ -35,4 +35,3 @@ jobs:
           fi
       - name: Push changes
         run: git push origin main
-  runs-on: self-hosted
