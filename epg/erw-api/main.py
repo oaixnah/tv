@@ -1,3 +1,17 @@
+"""EPG数据抓取模块，从erw.cc API获取电视节目指南数据。
+
+该模块通过调用erw.cc的API接口，获取指定日期的电视频道节目信息，
+并将数据转换为标准的EPG XML格式文件。
+
+Example:
+    $ python main.py
+    # 生成当天的EPG数据文件e.xml
+
+Attributes:
+    CHANNEL_NAMES: 支持的电视频道名称列表
+"""
+
+import logging
 from datetime import datetime
 
 import requests
@@ -5,6 +19,9 @@ import requests
 from epg.common import save_epg_file
 from epg.models import Data, Channel, Programme
 
+logger = logging.getLogger(__name__)
+
+# 支持的电视频道名称列表，用于从API获取节目数据
 CHANNEL_NAMES = (
     'CCTV1',
     'CCTV2',
@@ -79,7 +96,19 @@ CHANNEL_NAMES = (
 )
 
 
-def get_epg(channel_name: str, date: str):
+def get_epg(channel_name: str, date: str) -> dict | None:
+    """从erw.cc API获取指定频道和日期的EPG数据。
+
+    Args:
+        channel_name: 频道名称，如 'CCTV1'
+        date: 日期字符串，格式为 'YYYYMMDD'
+
+    Returns:
+        包含节目数据的字典，如果请求失败则返回None
+
+    Raises:
+        requests.RequestException: 网络请求异常
+    """
     try:
         req = requests.get(
             f"https://api.erw.cc/?ch={channel_name}&date={date}",
@@ -90,17 +119,34 @@ def get_epg(channel_name: str, date: str):
         )
         return req.json()
     except requests.RequestException as e:
-        print(f"Request failed: {e}")
+        logger.error(f"Request failed: {e}")
         return None
 
 
-def get_data(date: str):
+def get_data(date: str) -> Data:
+    """获取所有频道的EPG数据并转换为标准格式。
+
+    遍历所有支持的电视频道，调用API获取节目数据，
+    并将数据转换为标准的EPG数据模型。
+
+    Args:
+        date: 日期字符串，格式为 'YYYYMMDD'
+
+    Returns:
+        包含所有频道和节目数据的Data对象
+    """
     data = Data(data_from='https://api.erw.cc/')
+
+    # 遍历所有频道，获取每个频道的节目数据
     for channel_name in CHANNEL_NAMES:
         epg = get_epg(channel_name, date)
         if epg is None:
             continue
+
+        # 添加频道信息
         data.channels.append(Channel(id=channel_name, display_name=channel_name))
+
+        # 添加节目信息
         for item in epg["epg_data"]:
             data.programmes.append(Programme(
                 channel=channel_name,
@@ -112,7 +158,8 @@ def get_data(date: str):
 
 
 if __name__ == '__main__':
+    """主函数入口，生成当天的EPG数据文件。"""
     today = datetime.now()
-    date_str = today.strftime("%Y%m%d")  # 20260312
+    date_str = today.strftime("%Y%m%d")  # 格式：20260312
     epg_data = get_data(date_str)
     save_epg_file(epg_data)
