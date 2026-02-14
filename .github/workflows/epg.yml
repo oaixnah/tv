@@ -35,4 +35,4 @@ jobs:
           fi
       - name: Push changes
         run: git push origin main
-
+  runs-on: self-hosted
