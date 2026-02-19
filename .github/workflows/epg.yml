@@ -1,7 +1,7 @@
 name: EPG Update
 on:
   schedule:
-    - cron: '15 16,18 * * *'
+    - cron: '15 16 * * *'
 
 jobs:
   build:
