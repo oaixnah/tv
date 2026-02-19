@@ -10,6 +10,8 @@ https://tv.oaix.tech/logo/{name}.png
 
 ### 节目单
 
+[![EPG Update](https://github.com/oaixnah/tv/actions/workflows/epg.yml/badge.svg?branch=main)](https://github.com/oaixnah/tv/actions/workflows/epg.yml)
+
 ```
 https://tv.oaix.tech/e.xml
 ```
