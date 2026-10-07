@@ -19,7 +19,7 @@ jobs:
 
       - name: Update EPG Files
         run: |
-          uv run python -m epg.erw-api.main
+          uv run python -m epg.suzukua.main
           git add e.xml
           if ! git diff-index --quiet HEAD --; then
             git commit -m "EPG Update."
