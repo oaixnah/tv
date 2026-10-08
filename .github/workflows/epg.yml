@@ -2,7 +2,6 @@ name: EPG Update
 on:
   schedule:
     - cron: '15 16 * * *'
-  workflow_dispatch:
 
 jobs:
   build:
