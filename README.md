@@ -23,4 +23,4 @@ https://tv.oaix.tech/e.xml
 ## 感谢
 
 - [fanmingming/live](https://github.com/fanmingming/live)
-- [Erw-API](https://api.erw.cc/)
+- [suzukua/epg](https://github.com/suzukua/epg)
